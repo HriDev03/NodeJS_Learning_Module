@@ -1,0 +1,208 @@
+Core OOP Concepts
+
+Objects & Properties
+
+Object literals vs constructors
+
+Property descriptors (configurable, enumerable, writable)
+
+Getters/setters
+
+this Keyword
+
+Implicit, explicit (call, apply, bind), and new binding
+
+Arrow functions vs regular functions
+
+Constructors & Prototypes
+
+Constructor functions
+
+prototype property vs __proto__
+
+4 .Inheritance
+
+Prototypal inheritance
+
+extends and super
+
+Method overriding
+
+
+
+
+
+
+JS AND CLASSES
+oops is a programming style-----------> OOPS based , Functional based
+
+OOPS : Away to write our code and we think everything in the form of an object
+other ways : Procedural , Functional 
+Angular built upon the concept of OOPS
+
+Kya classes hoti hai in Js ? 
+---> it was introduced in ES6 , Js is a prototype based language
+classes are syntactic sugar based on prototypes, Gives syntax for Devs coming from class based language
+
+
+what is OOPS ?
+A programing style 
+
+OBJECT : COLLECTION OF PROPERTIES AND METHODS
+-> toLowercase() , promises , toUppercase()
+
+parts of OOPS?
+Object literal :  {}
+constructor functions
+prototypes
+
+-- Constructor functions
+-- PROTOTYPES (proto , prototypes ,  prototypal Inheritance)
+-- CLASSES
+-- INSTANCES (new,this)
+
+
+KEYWORDS : 
+Abstraction : to hide details of the implimentation (fetch)
+
+Encapsulation : to encapsulate/wrap data in a class
+
+Inheritance : To inherit the property of a parent and we can access it's metods
+
+Polymorphism : Many Versions of the same method , A single method can perform many functions (console.log())
+
+
+Agar multiple users bananehai toh baar baar code repeate karnaa padhta
+
+    const user2={
+        firstName: 'Hri',
+        lastName:"Sharma",
+        age:'2003',
+
+        // getAgeYear:function(){
+        //     return new Date().getFullYear()-user.age
+        // }
+        getAgeYear(){
+            return new Date().getFullYear()-user2.age
+        }
+    }
+
+
+
+to solve this issue we got factory function
+it is like a factory we will provide the input and well get an object as an output
+FACTORY FUNCTIONS : FUNCTIONS THAT WILL RETURN US OBJECTS
+
+
+/*
+    function createUser(firstName,lastName,age){
+        const user={
+            // if key and values are same no need to write them seperately            firstName:firstName,
+            firstName,
+            lastName,
+            age,
+            // created only once in the memory
+            getBirthYear(){
+                return new Date().getFullYear()-user.age
+            }
+        }
+        return user
+    }
+
+    const user3=createUser('Hri','Sharma',22)
+    const user4=createUser('Hridyesh','Sharma',20 )
+*/
+
+Now all this data stores seperately inside different memory location that was not efficient
+in global scope THIS refers to the global scope
+But when called for an object this will point to that particular object
+created only once in the memory
+
+polymorphism : it works for all the changing values
+but this breaks abstraction
+
+
+
+/*
+
+    -------------------------------  THIS KEYWORD -----------------------------------------
+    THIS IS A KEYWORD IN Js that we can access , in global scope it points to window Object
+    and it is used to point to a particular object
+
+    if we cal THIS INSIDE AN OBJECT it will point to that object
+
+*/
+
+// java script gives us ways to make our function private
+// when we use new keyword in front of a function itll return an object
+
+--------------------------------------      CONSTRUCTOR FUNCTION        -------------------------------
+function CreateUser(firstName,lastName,age){
+    // if key and values are same no need to write them seperately firstName:firstName,
+    this.firstName=firstName
+    this.lastName=lastName
+    this.age=age
+}
+
+// sabko iss ka access mill jaaye ga  aur ek hii jagah rahe ga
+CreateUser.prototype.getBirthYear = function(){
+    return new Date().getFullYear()-this.age
+}
+
+// function we are calling by using our new keyword is our construcor function
+// new createUser("hii")
+
+const user1=new CreateUser("Hri","sharma",21)
+// without new keyword this will point to window object
+const user2= CreateUser("Hri","sharma",21)
+
+
+--------------------------      PROTOTYPES        -------------------------------------------------------
+jab costructor function ko call karege with new keyword Itll return us an object
+and this will point to that particular object , and then we insert the required value
+
+
+
+    Definition of Prototype (in JavaScript):
+        A prototype is an object that other objects can inherit properties and methods from. In JavaScript, 
+        every function has a .prototype property, and every object has an internal [[Prototype]] (accessible via __proto__),
+        which forms the basis of JavaScript's prototypal inheritance.
+
+    Think of it like this:
+        A prototype is a blueprint for objects.
+
+    If an object doesn't have a property or method, JavaScript looks up its prototype to try to find it.
+
+    Example:
+        
+        function Person(name) {
+             this.name = name;
+        }
+
+        // Add a method to the prototype
+        Person.prototype.greet = function() {
+            console.log("Hello, " + this.name);
+        };
+
+    const p1 = new Person("Alice");
+
+    // greet is not defined on p1 directly...
+    console.log(p1.greet); // Found via prototype chain
+
+    Summary:
+   
+    .prototype → Property on a constructor function, used to define what instances inherit.
+
+    __proto__ → Internal reference on an object, points to its prototype (usually the 
+    .prototype of the constructor that made it).
+
+*/
+
+
+// every function has a prototype property
+// when we make an object using a constructor function prototype property will be attatched and will be called [    _proto_     ]
+// if we created some function and add it into prototype of the constructor function it also moves to the object made by it in the form of proto
+
+
+// ISS SE BOHOT PROBLEMS AAYI ISSE SOVE KARNE KE LIYE CLASSES AAYI
+//

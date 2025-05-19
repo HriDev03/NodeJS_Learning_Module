@@ -1,0 +1,136 @@
+console.log("Start");
+
+let importantAction=(userName,cb)=>{
+    setTimeout(()=>{
+       cb("inside the async function1 "+userName);
+    },1000)
+};
+
+
+let importantAction2=(userName,cb)=>{
+    setTimeout(()=>{
+       cb("inside the async function 2 for  "+userName);
+    },1000)
+};
+
+
+let importantAction3=(userName,cb)=>{
+    setTimeout(()=>{
+       cb("inside the async function 3 for  "+userName);
+    },1000)
+};
+
+
+let importantAction4=(userName,cb)=>{
+    setTimeout(()=>{
+       cb("inside the async function 4 for  "+userName);
+    },1000)
+};
+
+const message=importantAction("Hri",(message)=>{
+    console.log(message); // callbacks make it sync
+
+    // run it once import action has done execution
+    importantAction2("hri2",(message)=>{
+
+        console.log(message);
+        
+        importantAction3("hri3",(mess)=>{
+        
+            console.log(mess);
+            
+             
+            importantAction4("hri4",(mess)=>{
+                
+                console.log(mess);
+            })
+        })
+    })
+})
+
+// PROMISES : Eventual completion and end of code
+// Promise.resolve()
+
+
+console.log("Start");
+
+let importantAction=(userName)=>{
+    return new Promise((res,rej)=>{
+        setTimeout(()=>{
+        res("inside the async function "+userName);
+    },1000)
+    })    
+};
+
+let importantAction2=(userName)=>{
+    return new Promise((res,rej)=>{
+        setTimeout(()=>{
+        res("inside the async function "+userName);
+    },1000)
+    }) 
+};
+
+let importantAction3=(userName)=>{
+    return new Promise((res,rej)=>{
+        setTimeout(()=>{
+            res("Ok Hi "+userName)
+        },1000)
+    })   
+};
+
+console.log("end");
+
+// importantAction("Hri")
+//     .then((res)=>{
+//         console.log(res);
+//         importantAction2("Hri2")
+//             .then((res)=>{
+//                 console.log(res);
+//                 importantAction3("hri3")
+//                      .then((res)=>{
+//                          console.log(res);
+//                      })
+//                  })
+//      })
+//     .catch((err)=>console.log(err))
+/*
+importantAction("Hri")
+    .then((res)=>{
+        console.log(res);
+        return importantAction2("hri2")
+    })
+    .then((res)=>{
+        console.log(res);
+        return importantAction3("hri3")
+    })// jo imp Action 3 return karega usse print krr do
+    .then((res)=>{
+        console.log(res);
+    })
+    .catch((err)=>console.log(err))
+
+// Promise Combinators
+.all()  // arrays of results of all the completed promises
+.race() // first fullfilled (resolved, rejected)
+.any()  // similar to race but will give the first resolved promise , if all rejected then it'll be rejected
+.getSettled()// result as an array
+
+*/
+
+//ASYNC AWAIT
+// when we want promises to be executed one after another
+const res=async()=>{
+    try{
+        let message1=await importantAction("Hri");
+        console.log(message1);
+        let message2=await importantAction2("Hri2");
+        console.log(message2);
+        let message3=await importantAction3("Hri3");
+        console.log(message3);
+    }catch(err){
+        console.log(err);
+    }
+  
+}
+res();
+
+// A clean way to resolve promises
