@@ -65,9 +65,9 @@ console.log(multiPlyBy5.prototype);//iss method ka this hai
 //prototype ki properties and this ka context is present
 
 
-function createUser(username,score){
+function createUser(username,age){
     this.username=username
-    this.score=score
+    this.age=age
 }
 
 createUser.prototype.increment=function(){
@@ -79,9 +79,78 @@ createUser.prototype.increment=function(){
 
 createUser.prototype.printMe=function(){
     //jisne pucha hai uska bata do
-    console.log(`Sore is ${this.score}`);; //score kiska increase karu, 250 ko increase karo yaa 25 ko
+    console.log(`age is ${this.age}`);; //score kiska increase karu, 250 ko increase karo yaa 25 ko
     //jisne bhi bulaya hai usseke current context mai value increase karo
 }
 
-const userr1=createUser("Hridyesh",21)
-const userr2=createUser("Hridyeshh",22)
+const userr1=new createUser("Hridyesh",21)
+const userr2=new createUser("Hridyeshh",22)
+
+let myHero=['IronMan','spiderMan']
+let heroPower={
+    
+    IronMan:"Arc Reactor 3000",
+    spiderMan:"Spidey Sense",
+
+    getSpiderPower:function(){
+        console.log(`Spider power is ${this.spiderMan}`);
+    }
+}
+
+//seedha object mai naayi property add krr do it'll be passed to all other stuff like Arrays , Objects and Functions
+// every thing is an object soo it will be added tp everything like array, obj
+Object.prototype.Avengers=function(){
+    console.log("Avengers assemble");
+
+}
+//only added to array
+Array.prototype.End=function(){
+    console.log("3000");
+
+}
+
+//accessing the prototype in object
+heroPower.Avengers()
+//accessing the prototype in ARRAY
+myHero.Avengers();
+myHero.End();// wont be present cuz added only in the array prototype
+
+
+//HOW INHERITANE WAS DONE EARLIER using prototype
+//PROTOTYPAL INHERITANCE
+const User={
+    name:"hri",
+    email:"xyz@gmail.com"
+}
+const Teacher={
+    makeVideo:true
+}
+
+const TeachingSupport={
+    isAvailable:false
+}
+
+const TASupport={
+    makeAssignment:"JS DEV NODE",
+    fullTime:true,
+    __proto__: TeachingSupport,// how prototype was usedearlier for inheritance
+}
+
+Teacher.__proto__=User
+
+
+//modern : how teaching support will get all the property of teacher
+Object.setPrototypeOf(TeachingSupport,Teacher)
+
+
+// SOLVE THIS PROBLEM 
+/*
+    let myName="hridyesh    "
+    let myDev="hri03        "
+    console.log(myName.trueLength);
+*/
+//i want to create a global method for strings that will return the true length of a string by removin gwhite spaces , cant use .trim() directly
+let myName="Batman      "
+String.prototype.trueLength=function(){
+    console.log(`true length of ${this.name} is ${this.trim().length}`);
+}
