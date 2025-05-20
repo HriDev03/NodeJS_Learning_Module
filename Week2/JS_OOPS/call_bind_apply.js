@@ -65,5 +65,14 @@ console.log(user);
 
 //APPLY METHOD
 //whats the difference between call and apply() only the way we pass the arguments
-namee.printFullName.apply(name2,["Mumbai","Maharashtra"])//where our this to be pointed: refrence of this variable, list of arguments
+namee.printFullName.apply(name2,["Mumbai","MH"])//where our this to be pointed: refrence of this variable, list of arguments
 //pass the arguments in the form of array list
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------
+//BIND METHOD
+let printMyName=printFullName.bind(name2,"Mumbai","MH")
+// it will create a copy of print full name and it'll bind that to print2 object and will return that function
+// that can be called later
+console.log(printMyName());// it will return us a function that can be invoked later
+//keep the copy of method and use it later
+// in copy we are directly invoking it but in bind we wil get a function that can be invoked later
