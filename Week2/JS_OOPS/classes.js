@@ -153,3 +153,16 @@ class CreateUser{
 CreateUser.myName='Hri'
 
 //classes , static methods , static functions , private methods , private properties , getters setters
+class parent{
+    name="hrii"
+    age=23
+}
+
+class child extends parent{
+    constructor(game){
+        super()
+        this.game=game
+    }
+}
+const child1=new child("football")
+console.log(child1);

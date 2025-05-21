@@ -50,7 +50,8 @@ const userB=new CreateUser('Hri','Sharma','22')
 
 
 //THIS KEYWORD DETAILS
-/*  also is different in strict and nn strict mode , 
+/*  
+    also is different in strict and nn strict mode , 
     determinded by how our function is called, THIS KEYORD uss object ko point karta hai jii object ne 
     kisi function ko call kiya ho 
     -----------------------------------WE USUALY WRITE THIS INSIDE A FUNCTION 
@@ -61,10 +62,12 @@ const userB=new CreateUser('Hri','Sharma','22')
 console.log(this);
 
 //constructor function
+
 function Hii(){
     this.hello='Hello',
     console.log(this);
 }
+
 //called with new keyword it return us an object and this will point there
 new Hii()
 Hii()// here wll point to global 
@@ -81,49 +84,46 @@ const user1={
         function getAge(){
             console.log("getting age");
             console.log(this);
-            
         }
         // agar koi Obj/function ke andar koi method hai and uske andar ek aur function hai toh voh Internalfunction will point to the window
         getAge();
         console.log(this);// inside our fullName method it'll point to our object
     },
-
     printTags(){
         this.tags.forEach((tag)=>{
             console.log(tag);
-            // will again oint to window as it is called by for each
+            // will again point to window as it is called by for each
             console.log(this);
         }, this)//{}
-        //itll point to our user object
-        //pointer kaha point karega
+        /*
+            itll point to our user object
+            pointer kaha point karega
+        */
     }
-}
-
-//-------------------------------------------------------------------------------------------------------
-// IMP CORNER CASE : FUNCTION KE ANDAR FUNCTION(clg(this))----->will point back to window
-//-------------------------------------------------------------------------------------------------------
-
-
+}  
+//-----------------------------------------------------------------------------------------------//
+// IMP CORNER CASE : FUNCTION KE ANDAR FUNCTION(clg(this))  ----->  will point back to window   //
+//---------------------------------------------------------------------------------------------//                              
 // THIS In case of event Listeners
 const h1=document.querySelector('h1')
 //event will listen or point to that componet to which event listener is attatched to 
 h1.addEventListener("click",()=>{
     console.log(this);
 })
-
 //event listener : in case of event LISTENER THIS sirf vohi point  karega jaha usse attatch kiya hai
-
 //IN CASE OF ARROW FUNCTIONS
 //BEHAVIOUR OF THIS IN CASE OF ARROW FUNCTIONS 
-
 const user2={
+
     firstName: "Hri",
     lastName: "Sharma",
     tags: ['a','b','c'],
+    
     // A NORMAL METHOD WILL POINT TO THE CLASS/OBJ IN WHICH IT IS PRESENT AND WHAT IS CALLING IT 
     printTags(){
         console.log(this);
     },
+
     //WHAT IN CASE OF ARROW FUNCTION
     printTagg:()=>{
         console.log(this);
@@ -135,13 +135,16 @@ const user2={
 }
 
 // in case of classes
-class User3{
+class User3{    
+
     constructor(){
         this.firstName='Hridyesh'
         console.log(this);  // it'll point to the obj hat we will make using this class
     }
+
     getUser(){
         console.log(this);
     }
 }
+
 new User3();                                
