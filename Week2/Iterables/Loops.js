@@ -31,3 +31,9 @@ const preson={
 for(const key in preson){
     console.log(key);
 }
+
+// -Arrays and their methods (map, filter, reduce, forEach
+// -JSON parsing and stringifying
+// -Arrow functions
+// -Modules (import/export)
+ 

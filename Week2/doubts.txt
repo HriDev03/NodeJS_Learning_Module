@@ -1,0 +1,219 @@
+//stringify related
+
+//to be studied laterr
+Q) IF THERE IS AN object and in it there are 1000's of methods soo when we strigify it there is loss of information to avoid it
+we convert our function code to string first and then we stringify the Object
+it's done manually what are the better ways to do it
+
+
+When you have an object with thousands of methods, and you want to avoid losing those methods during the JSON.stringify() process, converting the methods into strings and then stringifying the object manually is one approach. However, this process can be cumbersome, especially for complex or large objects.
+
+Here are a few better and more efficient approaches to avoid the loss of methods during stringification:
+
+1. Use a Custom toJSON Method
+You can define a custom toJSON method on the object, which explicitly serializes the methods as strings, then use JSON.stringify().
+
+javascript
+Copy
+Edit
+const obj = {
+  method1() {
+    console.log('Method 1');
+  },
+  method2() {
+    console.log('Method 2');
+  },
+  toJSON() {
+    const serializedObject = {};
+    for (const key in this) {
+      if (typeof this[key] === 'function') {
+        // Convert function to string
+        serializedObject[key] = this[key].toString();
+      } else {
+        serializedObject[key] = this[key];
+      }
+    }
+    return serializedObject;
+  }
+};
+
+const jsonString = JSON.stringify(obj);
+console.log(jsonString);
+Pros:
+
+Clean and structured approach.
+
+Allows for fine-grained control over serialization.
+
+Doesn't require external libraries or additional complexity.
+
+Cons:
+
+It might not scale well for very large objects with numerous methods.
+
+2. Use a Recursive Serialization Function
+If the object contains nested objects with methods, a more generic solution is to use a recursive function that traverses all properties and converts methods to strings.
+
+javascript
+Copy
+Edit
+function serializeMethods(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
+
+  const serialized = {};
+  for (const key in obj) {
+    if (typeof obj[key] === 'function') {
+      serialized[key] = obj[key].toString();
+    } else if (typeof obj[key] === 'object') {
+      serialized[key] = serializeMethods(obj[key]);
+    } else {
+      serialized[key] = obj[key];
+    }
+  }
+  return serialized;
+}
+
+const obj = {
+  method1() { console.log('Method 1'); },
+  nested: {
+    method2() { console.log('Method 2'); },
+  },
+};
+
+const serializedObject = serializeMethods(obj);
+const jsonString = JSON.stringify(serializedObject);
+console.log(jsonString);
+Pros:
+
+Handles nested objects and deep serialization.
+
+Works for various types of objects (functions, objects, arrays, etc.).
+
+Cons:
+
+Recursive functions can be expensive for large objects, especially deep objects.
+
+3. Use a Library Like flatted
+Libraries like flatted can help to handle circular references and complex objects, but you may need to add custom serialization logic to handle methods. You would still need to convert the methods to strings before using JSON.stringify.
+
+javascript
+Copy
+Edit
+const flatted = require('flatted');
+
+const obj = {
+  method1() { console.log('Method 1'); },
+  nested: {
+    method2() { console.log('Method 2'); },
+  },
+};
+
+const serializeMethods = (obj) => {
+  const serialized = {};
+  for (const key in obj) {
+    if (typeof obj[key] === 'function') {
+      serialized[key] = obj[key].toString();
+    } else {
+      serialized[key] = obj[key];
+    }
+  }
+  return serialized;
+};
+
+const serializedObject = serializeMethods(obj);
+const jsonString = flatted.stringify(serializedObject);
+console.log(jsonString);
+Pros:
+
+Handles complex or circular references effectively.
+
+Custom serialization is still possible.
+
+Cons:
+
+Adds external dependencies to your project.
+
+Doesn't automatically handle method serialization.
+
+4. Manual Serialization (Better Control)
+If you're willing to handle it manually, you can create a function to walk through the object's properties and serialize methods as strings. This can be more customized but may become cumbersome if the object structure is dynamic.
+
+javascript
+Copy
+Edit
+function customStringify(obj) {
+  let serializedObject = {};
+  for (const key in obj) {
+    if (typeof obj[key] === 'function') {
+      serializedObject[key] = obj[key].toString();
+    } else {
+      serializedObject[key] = obj[key];
+    }
+  }
+  return serializedObject;
+}
+
+const obj = {
+  method1() { console.log('Method 1'); },
+  nested: {
+    method2() { console.log('Method 2'); },
+  },
+};
+
+const serializedObject = customStringify(obj);
+const jsonString = JSON.stringify(serializedObject);
+console.log(jsonString);
+Pros:
+
+Provides the most flexibility.
+
+Can handle any specific logic needed for the object's methods.
+
+Cons:
+
+Requires manual and potentially complex handling for nested objects.
+
+Doesn't handle circular references or other advanced cases by default.
+
+5. Using Map or WeakMap for Method Storage
+If your object has a lot of methods, you might consider using a Map or WeakMap to store the methods separately from the main object and only serialize the object properties. This method can be more scalable but requires a different architecture.
+
+javascript
+Copy
+Edit
+const methodMap = new Map();
+
+const obj = {
+  id: 1,
+  name: "Example",
+};
+
+// Storing method outside the object
+methodMap.set(obj, {
+  method1() { console.log('Method 1'); },
+  method2() { console.log('Method 2'); },
+});
+
+// Serialize the object
+const serializedObject = {
+  ...obj,
+  methods: Array.from(methodMap.get(obj)).map(fn => fn.toString())
+};
+
+const jsonString = JSON.stringify(serializedObject);
+console.log(jsonString);
+Pros:
+
+Allows separation of methods and data, keeping the object cleaner.
+
+Can scale for objects with numerous methods.
+
+Cons:
+
+Requires more complex architecture.
+
+Might be harder to maintain and understand for simpler use cases.
+
+
+
+*/
