@@ -79,23 +79,18 @@ console.log(printMyName());// it will return us a function that can be invoked l
 
 
 
-Objects & Properties
-Object literals vs constructors
- 
-Property descriptors (configurable, enumerable, writable)
-Getters/setters
- 
-this Keyword
-Implicit, explicit (call, apply, bind), and new binding
- 
-Arrow functions vs regular functions
 
-Constructors & Prototypes
- 
-Constructor functions
-prototype property vs __proto__
- 
-4 .Inheritance
-Prototypal inheritance
-extends and super
-Method overriding
+
+// Implicit, explicit (call, apply, bind), and new binding
+//  
+// Arrow functions vs regular functions
+
+// Constructors & Prototypes
+//  
+// Constructor functions
+// prototype property vs __proto__
+//  
+// 4 .Inheritance
+// Prototypal inheritance
+// extends and super
+// Method overriding
