@@ -79,84 +79,7 @@ select dept, count(emp_id) from employees group by dept
 select dept , sum(salary) from employees group by dept 
 
 --string functions
---concat : concationation, dono word ko combine krr ke print karo
-select concat('Hello','World');
-select emp_id, concat(fname,lname) AS fullName , dept, salary from employees;
-
---with seperators
-select emp_id, concat_ws(' ',fname,lname) AS fullName , dept, salary from employees;
---concat_ws
-select CONCAT_WS('-','one','two','three');
-
---substring: string ka chota part nikalna
-select substr('Hello Buddy!!',7,13)
-SELECT substr('Hello Buddy!!', -5, 3);
-
---replace: to replace the value of a string
--- replace(str,from_str,to_str)
-select replace('Hello Buddy','Hello','Hey');
-select replace(dept,'IT','Tech') from employees
-
---reverse: to reverse the given string
-select reverse('Hello Jee')
-
--- length: to print length of the given string
---print names where length is less than 5
-select * from employees where length(fname)>5;
-
---upper and lower
-select upper(fname) from employees;
-select lower(fname) from employees;
-
---left , right and trim
-
---left : left se kitne characters chahiye
-select left('hello world',4)
-
---right : right se kitne characters chahiye
-select right('hello world',5)
-
---trim : used to remove white spacess
-SELECT LENGTH(' HELLO  ')
-SELECT LENGTH(TRIM(' HELLO  '))
---position : to find the position of a character or word in a long string
-select position('om' in 'thomas') -- 3 cuz o is present in 3rd position
-
-select concat_ws(':',emp_id,concat_ws(' ',fname,lname),upper(dept) )from employees where emp_id=2
-
---PRACTICE QUESTIONS
---by using desc
-SELECT * from employees order by salary DESC limit 1
---by using sub-querries : query ke andar ek aur querry
-SELECT * from employees where salary=(select MAX(salary) FROM employees);
--- SUM OF IT DEPARTMENT
-select dept,sum(salary) from employees  where dept='IT'
---TO PRINT AVERAGE SALARY
-select dept,AVG(salary) from employees group by dept
-
--- group by on multiple columns
-CREATE TABLE employees2 (
-    emp_id SERIAL PRIMARY KEY,
-    fname VARCHAR(50),
-    dept VARCHAR(50),
-    job_title VARCHAR(50),
-    salary INT
-);
-
-INSERT INTO employees2 (fname, dept, job_title, salary) VALUES
-('Alice', 'HR', 'Manager', 70000),
-('Bob', 'HR', 'Executive', 40000),
-('Charlie', 'IT', 'Manager', 90000),
-('David', 'IT', 'Developer', 60000),
-('Eve', 'IT', 'Developer', 60000),
-('Frank', 'Finance', 'Analyst', 50000),
-('Grace', 'Finance', 'Manager', 80000),
-('Hannah', 'Finance', 'Analyst', 55000);
-
-SELECT dept, job_title, AVG(salary) AS avg_salary
-FROM employees2
-GROUP BY dept, job_title;
-
+ 
 create table person(
 	id serial primary key,
 	fname varchar(50) not null,
@@ -234,6 +157,7 @@ from employees;
 -- 2) one to many
 -- 3) many to many
 
-
+--foreign key is used to set relationshpis between two tables
+create database StoreDB
 
 select * from person
