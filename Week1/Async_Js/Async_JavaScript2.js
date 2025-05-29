@@ -46,12 +46,11 @@ setTimeout(hello,3000);
 // data 2s mai fetch hoga
 
 function getData(dataId){
- 	
 	setTimeout(()=>{
    		console.log("data : ",dataId);
  	},2000)
-
 }
+
 getData(1);
 
 //-------------------------------------------------------------------------------------------
@@ -87,13 +86,12 @@ getData(1,()=>{
 
 		});
 	}); 
-});		//Pyramid of doom
+});		
 
+//Pyramid of doom
 //--------------------------------------------------------------------------------------
 // Promises : WAADA , VISHWAAS --------------> Callback hell waali problem ko solve karne ke liye promises aaye
-
 // Promise of an eventual completion or rejection of a task. Jo bhi baad mai iska result aaye ga usske saath baad mai kaam karege
-
 // it is an object in JS , a solution to call back hell
 
 // let promise=new Promise((res,rej)=>{
@@ -116,20 +114,28 @@ let promise=new Promise((res,rej)=>{
 
 let promise=new Promise((res,rej)=>{
 	console.log("Ï am a promise");
-	res("Some error occured")
+	rej("Some error occured")
 })
+
+
+promise.then(()=>{
+	// if promise has sucessfully executed hwat to do
+	console.log("Promise fullfilled")
+}).catch((e)=>console.log("rejected"))
+
+
 
 // if we run res it means promise is fulfilled and work is complete
 // if we rej it means promise is not fulfilled and work is not complete
 
 // fetching data from an api , that API will return a promise
 
-function getData(dataId,getNetData){
+function getData(dataId,getNextData){
 	// i promise that you will get result of this process after 5seconds
 	return new Promise((res,rej)=>{
 		setTimeout(()=>{
    			console.log("data : ",dataId);
-			resolve("sucess, 200")
+			res("sucess, 200")
 			if(getNextData){
 				getNextData();
 			}
@@ -143,17 +149,11 @@ function getData(dataId,getNetData){
 // 1) if promise is resolved =====> .then()
 // 2) if promise is rejected=====> .catch()
 
-promise.then(()=>{
-	// if promise has sucessfully executed hwat to do
-	console.log("Promise fullfilled")
-}).catch((e)=>console.log("rejected"))
-
-
 
 const getPromise=()=>{
 	return new Promise((res,rej)=>{
 		console.log("i am a promise");
-		resolve(200);
+		res(200);
 	});
 }
 
@@ -179,7 +179,7 @@ function asyncFunc(){
 	return new Promise((res,rej)=>{
 		setTimeout(()=>{
 			console.log("some data 1");
-			resolve("sucess");
+			res("sucess");
 		},4000)
 	})
 }
@@ -188,7 +188,7 @@ function asyncFunc2(){
 	return new Promise((res,rej)=>{
 		setTimeout(()=>{
 			console.log("some data 2");
-			resolve("sucess");
+			res("sucess");
 		},4000)
 	})
 }
@@ -241,7 +241,7 @@ getData(1).then((res)=>{
 	 return getData(3);
 }).then(()=>{
 	console.log(res)
-}
+})
 
 // -----------------------------------------------------------------------------------------
 // PROMISE API 
@@ -279,21 +279,22 @@ function asyncFuncFail() {
 	.then(([res1,res2])=>{
 		console.log("results of Promise.all");
 		console.log(res1);
-		console.log(res1);
+		console.log(res2);
 	})
 	.catch((err)=>{"console.log",err});
 
 	// in case if one promise fails we wont get the resultant array
 
-//2) . any() : Will return us the result from the  first fulfilled promise , if all rejected 	then error
+//2) . any() : Will return us the result from the  first fulfilled promise , if all rejected then error
 	
 	let p1=asyncFunction();
 	let p3=asyncFuncFail();
 	let p2=asyncFunction2();
 
+	// will show result from promise 1 only ,  as it is the fist resolved execution
 	Promise.any([p3,p1,p2])
 	.then((res)=>{
-		console.log(res) // will show result from promise 1 only ,  as it is the fist resolved execution
+		console.log(res) 
 	})
 	.catch((err)=>{
 		console.log(err);
@@ -317,17 +318,19 @@ function asyncFuncFail() {
 	// will show result from promise 3 only ,  as it is the fist settled promise
 
 
-//4) . getSettled() : will want for every promise to complete and then will give us the resultant array including all the answers of both resolved and rejected
+//4) .allSettled() : will want for every promise to complete and then will give us the resultant array including all the answers of both resolved and rejected
 
-	let p1=asyncFunction();
-	let p3=asyncFuncFail();
-	let p2=asyncFunction2();
+	let p1 = asyncFunc();
+	let p2 = asyncFunc2();
+	let p3 = asyncFuncFail();
 
-	Promise.race([p3,p1,p2])
-	.then((res)=>{
-		console.log(res) 
-	})
-	.catch((err)=>{
+	Promise.allSettled([p1, p2,p3])
+  	.then(([res1, res2]) => {
+    	console.log("Results of Promise.allSettled:");
+    	console.log(res1);
+    	console.log(res2);
+  	})
+  	.catch((err)=>{
 		console.log(err);
 	})
 
@@ -359,7 +362,7 @@ function api(loc){
 	return new Promise((res,rej)=>{
 		setTimeout(()=>{
 			console.log(`got weather data for ${loc}`);
-			resolve(200);
+			res(200);
 		},2000)
 		
 	});
@@ -378,7 +381,7 @@ function getData(dataId){
 	return new Promise((res,rej)=>{
 		setTimeout(()=>{
    			console.log("data : ",dataId);
-			resolve("sucess, 200")
+			res("sucess, 200")
 		},2000)
 
 	});
@@ -394,7 +397,7 @@ async function getAllData(){
 
 getAllData();
 
-// NOW WHEN WE USE ASYNC AWAIT WE HAVE TO USE THEM INSIDE A FUNCTION , WE CAN AVAOID IT BY USING
+// NOW WHEN WE USE ASYNC AWAIT WE HAVE TO USE THEM INSIDE A FUNCTION , WE CAN AVOID IT BY USING
 
 // VERY IMPORTANT STUFF
 // --------------------------------------------------------------------------------------

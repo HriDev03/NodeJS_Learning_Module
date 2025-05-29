@@ -81,8 +81,6 @@ console.log(printMyName());// it will return us a function that can be invoked l
 
 
 
-// Implicit, explicit (call, apply, bind), and new binding
-//  
 // Arrow functions vs regular functions
 
 // Constructors & Prototypes

@@ -100,3 +100,4 @@ console.log("\n");
 
 
 //USE : we can use it to store data in local storae
+

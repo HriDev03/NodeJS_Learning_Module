@@ -35,6 +35,7 @@ with this event emitter obj we can
 -> get list of all event listeners
 */
 
+//requiring evenet module from node js
 // const EventEmitter= require('events');
 
 // const ChatRoomEventEmitter=new EventEmitter();
@@ -478,149 +479,149 @@ e.emit("user:logOut","Hri")
 
 ///////////////////////////////////////////////////////// CLASS BASED LOGGER   ///////////
 
-// const EventEmitter = require("events");
+const EventEmitter = require("events");
 
-// // since we extended this it will be able to do stuff just like the event emitter class
-// const MyLogger extends EventEmitter{
+// since we extended this it will be able to do stuff just like the event emitter class
+const MyLogger extends EventEmitter{
 	
-// 	constructor(){
-// 		super();// calling the parent class constructor
-// 	}
+	constructor(){
+		super();// calling the parent class constructor
+	}
 
-// 	// Method to log a message
-//   	log(message) {
-//     		console.log(message);
-//     		// Emit an event 'messageLogged' whenever a message is logged
-//     		this.emit('messageLogged', { message });
-//   	}
-// }
+	// Method to log a message
+  	log(message) {
+    		console.log(message);
+    		// Emit an event 'messageLogged' whenever a message is logged
+    		this.emit('messageLogged', { message });
+  	}
+}
 
-// // Create an instance of MyLogger class
-// const logger = new MyLogger();
+// Create an instance of MyLogger class
+const logger = new MyLogger();
 
-// logger.on('messageLogged',(data)=>{
-// 	console.log("data received",data)
-// });
-
-
-// // Call the log method, which will trigger the 'messageLogged' event
-// logger.log('Hello, EventEmitter!');
+logger.on('messageLogged',(data)=>{
+	console.log("data received",data)
+});
 
 
-// ////////////////////////////// CLASS BASED CHAT APP -> SINGLE INSTANCE //////////////////////////////////////
-// const EventEmitter= require(évents);
+// Call the log method, which will trigger the 'messageLogged' event
+logger.log('Hello, EventEmitter!');
 
-// class ChatSim extends EventEmitter{
-// 	//methods
 
-// 	1)sending message
-// 	sendMessage(user,message){
-// 		console.log(`${user}:${message}`);
-// 		//once message is logged emit an event to tell message is received
-// 		this.emit('messageReceived',{user,message});
-// 	}	
-// }
+////////////////////////////// CLASS BASED CHAT APP -> SINGLE INSTANCE //////////////////////////////////////
+const EventEmitter= require(évents);
 
-// //Will keep the history of are chat
-// class MessageLogger{
-// 	constructor(){
-// 		this.chatRoom=new ChatSim();
-// 		this.chatRoom.on('messageReceived',(data)=>this.recordmessage(data));	
-// 	}
+class ChatSim extends EventEmitter{
+	//methods
+
+	1)sending message
+	sendMessage(user,message){
+		console.log(`${user}:${message}`);
+		//once message is logged emit an event to tell message is received
+		this.emit('messageReceived',{user,message});
+	}	
+}
+
+//Will keep the history of are chat
+class MessageLogger{
+	constructor(){
+		this.chatRoom=new ChatSim();
+		this.chatRoom.on('messageReceived',(data)=>this.recordmessage(data));	
+	}
 	
-// 	recordmessage(data){
-// 		 console.log(`${data.user} sent a message: "${data.message}"`);
-// 	}
-// }
+	recordmessage(data){
+		 console.log(`${data.user} sent a message: "${data.message}"`);
+	}
+}
 
-// class NotificationService {
-//   constructor() {
-//     this.chatRoom = new ChatSimulator(); 
+class NotificationService {
+  constructor() {
+    this.chatRoom = new ChatSimulator(); 
 
-//     // Listen for the 'messageReceived' event and send a notification
-//     this.chatRoom.on('messageReceived', (data) => this.notifyUser(data));
+    // Listen for the 'messageReceived' event and send a notification
+    this.chatRoom.on('messageReceived', (data) => this.notifyUser(data));
 
-//   }
+  }
 
-//   // Method to send a notification to the user
-//   notifyUser(data) {
-//     console.log(`Notification: New message from ${data.user} - "${data.message}"`);
-//   }
-// }
+  // Method to send a notification to the user
+  notifyUser(data) {
+    console.log(`Notification: New message from ${data.user} - "${data.message}"`);
+  }
+}
 
-// // Test the system
-// const messageLogger = new MessageLogger(); // Log messages
-// const notificationService = new NotificationService(); // Notify users
+// Test the system
+const messageLogger = new MessageLogger(); // Log messages
+const notificationService = new NotificationService(); // Notify users
 
-// // Simulate sending messages
-// const chatSimulator = new ChatSimulator(); // Instance of ChatSimulator to send messages
-// chatSimulator.sendMessage('Alice', 'Hello everyone!');
-// chatSimulator.sendMessage('Bob', 'Hi Alice! How are you?');
-// chatSimulator.sendMessage('Alice', 'I am doing great, thanks for asking!');
-// //  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Simulate sending messages
+const chatSimulator = new ChatSimulator(); // Instance of ChatSimulator to send messages
+chatSimulator.sendMessage('Alice', 'Hello everyone!');
+chatSimulator.sendMessage('Bob', 'Hi Alice! How are you?');
+chatSimulator.sendMessage('Alice', 'I am doing great, thanks for asking!');
+//  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// // EventEmitter Module
+// EventEmitter Module
 
-// const EventEmitter = require('events');
+const EventEmitter = require('events');
 
-// // ChatSim Class (Handles sending and receiving messages)
+// ChatSim Class (Handles sending and receiving messages)
 
-// class ChatSim extends EventEmitter {
-//     sendMessage(user, message) {
-//         console.log(`${user}: ${message}`);
-//         // Once the message is logged, emit an event that the message is received
-//         this.emit('messageReceived', { user, message });
-//     }
+class ChatSim extends EventEmitter {
+    sendMessage(user, message) {
+        console.log(`${user}: ${message}`);
+        // Once the message is logged, emit an event that the message is received
+        this.emit('messageReceived', { user, message });
+    }
 
-// }
+}
 
-// // MessageLogger Class (Handles logging of messages)
+// MessageLogger Class (Handles logging of messages)
 
-// class MessageLogger {
+class MessageLogger {
 
-//     constructor(chatRoom) {
+    constructor(chatRoom) {
 
-//         this.chatRoom = chatRoom;
+        this.chatRoom = chatRoom;
 
-//         // Listen for the 'messageReceived' event and log the message
-//         this.chatRoom.on('messageReceived', (data) => this.recordMessage(data));
+        // Listen for the 'messageReceived' event and log the message
+        this.chatRoom.on('messageReceived', (data) => this.recordMessage(data));
 
-//     }
+    }
 
-//     // Record the message
-//     recordMessage(data) {
-//         console.log(`${data.user} sent a message: "${data.message}"`);
-//     }
-// }
+    // Record the message
+    recordMessage(data) {
+        console.log(`${data.user} sent a message: "${data.message}"`);
+    }
+}
 
-// // NotificationService Class (Handles notifying users)
+// NotificationService Class (Handles notifying users)
 
-// class NotificationService {
+class NotificationService {
 
-//     constructor(chatRoom) {
+    constructor(chatRoom) {
 
-//         this.chatRoom = chatRoom;
-//         // Listen for the 'messageReceived' event and send a notification
-//         this.chatRoom.on('messageReceived', (data) => this.notifyUser(data));
+        this.chatRoom = chatRoom;
+        // Listen for the 'messageReceived' event and send a notification
+        this.chatRoom.on('messageReceived', (data) => this.notifyUser(data));
 
-//     }
+    }
 
-//     // Method to send a notification to the user
-//     notifyUser(data) {
-//         console.log(`Notification: New message from ${data.user} - "${data.message}"`);
-//     }
-// }
+    // Method to send a notification to the user
+    notifyUser(data) {
+        console.log(`Notification: New message from ${data.user} - "${data.message}"`);
+    }
+}
 
-// // Test the system
-// const chatSimulator = new ChatSim(); // Single instance of ChatSim
+// Test the system
+const chatSimulator = new ChatSim(); // Single instance of ChatSim
 
-// // Create the services that will listen to the same chat room
-// const messageLogger = new MessageLogger(chatSimulator); // Log messages
+// Create the services that will listen to the same chat room
+const messageLogger = new MessageLogger(chatSimulator); // Log messages
 
-// const notificationService = new NotificationService(chatSimulator); // Notify users
+const notificationService = new NotificationService(chatSimulator); // Notify users
 
-// // Simulate sending messages
-// chatSimulator.sendMessage('Alice', 'Hello everyone!');
-// chatSimulator.sendMessage('Bob', 'Hi Alice! How are you?');
-// chatSimulator.sendMessage('Alice', 'I am doing great!');
+// Simulate sending messages
+chatSimulator.sendMessage('Alice', 'Hello everyone!');
+chatSimulator.sendMessage('Bob', 'Hi Alice! How are you?');
+chatSimulator.sendMessage('Alice', 'I am doing great!');
