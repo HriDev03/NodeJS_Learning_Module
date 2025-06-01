@@ -69,6 +69,7 @@ readStream.pipe(uppperCaseTransform).pipe(writeStream)
 // writeStream.on("error",(err)=>{
 //     console.log("error : ",err.message);
 // })
+
 // //making a zipped file
 // const fs=require('fs')
 
@@ -81,3 +82,9 @@ readStream.pipe(uppperCaseTransform).pipe(writeStream)
 // createReadStream.pipe(gzip).pipe(createwriteStream)
 
 
+const fs=require("fs");
+const {Transform}=require("stream")
+
+const uppperCaseTransform=new Transform({
+    transform(__dirname)
+})

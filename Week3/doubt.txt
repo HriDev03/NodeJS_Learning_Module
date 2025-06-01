@@ -1,1 +1,0 @@
-soo like in postgres i have studied about indexing in which we create an internal data structure to speed up search but now a days redis is used , so why do we need indexing?

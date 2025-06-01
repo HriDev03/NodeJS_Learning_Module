@@ -24,3 +24,13 @@ readStream.on("error",(err)=>{
 writeStream.on("error",(err)=>{
     console.log("error : ",err.message);
 })
+
+
+// readStream.on("data",(chunks)=>{
+//     console.log("received data in the from of chunk : "+chunks);
+// })
+
+// readStream.on("end",()=>{
+//     console.log("data read sucessfully");
+// })
+readStream.pipe(writeStream)

@@ -166,7 +166,7 @@ with this event emitter obj we can
 
 // listeners(eventName)==> array of listeners of event
 // listenerCount(eventName)==> number of listeners for an event
-//eventNames()=>array of eventNames
+// eventNames()=>array of eventNames
 
 // myEmitter.on('log', () => console.log('Second')); 4th
 // myEmitter.on('log', () => console.log('Second')); 3rd

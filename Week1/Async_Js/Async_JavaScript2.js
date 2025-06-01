@@ -227,7 +227,7 @@ function getData(dataId){
 	return new Promise((res,rej)=>{
 		setTimeout(()=>{
    			console.log("data : ",dataId);
-			resolve("sucess, 200")
+			res("sucess, 200")
 		},2000)
 
 	});
@@ -535,34 +535,34 @@ Step1(()=>{
 })
 console.log("Async code running in bg ");
 */
-// MAKING TEA
-// function boil(cb){
-//     setTimeout(()=>{
-//         console.log("Boiling water ...");
-//         cb();
-//     },1000)
-// }
+MAKING TEA
+function boil(cb){
+    setTimeout(()=>{
+        console.log("Boiling water ...");
+        cb();
+    },1000)
+}
 
-// function Tea(cb){
-//     setTimeout(()=>{
-//         console.log("Adding tea leaves");
-//         cb()
-//     },1000)
-// }
-// function milk(cb){
-//     setTimeout(()=>{
-//         console.log("Adding milk");
-//         cb()
-//     },1000)
-// }
+function Tea(cb){
+    setTimeout(()=>{
+        console.log("Adding tea leaves");
+        cb()
+    },1000)
+}
+function milk(cb){
+    setTimeout(()=>{
+        console.log("Adding milk");
+        cb()
+    },1000)
+}
 
-// boil(()=>{
-//     Tea(()=>{
-//         milk(()=>{
-//             console.log("Tea made");
-//         })
-//     })
-// })
+boil(()=>{
+    Tea(()=>{
+        milk(()=>{
+            console.log("Tea made");
+        })
+    })
+})
 
 
 // function filterArray(arr,cb){

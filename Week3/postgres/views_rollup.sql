@@ -94,6 +94,7 @@ GROUP BY c.cust_name;
 --jaha se querry start ho rahi hai uske pehle create view
 
 create view billing_info as
+
 select c.cust_name,
 o.ord_date, 
 p.p_name ,
@@ -129,3 +130,15 @@ group by p_name having sum(price)>500
 select coalesce(p_name,'Total'), sum(price) AS ITEM_BILL from billing_info
 group by rollup(p_name) order by ITEM_BILL asc;
 --jaha null aaye ga uski jagah total aa jaaye ga
+
+SELECT 
+  c.cust_id, 
+  c.cust_name, 
+  COUNT(o.order_id) AS total_orders,
+  SUM(o.price) AS total_price
+FROM customers AS c
+FULL OUTER JOIN orders AS o 
+  ON c.cust_id = o.cust_id
+GROUP BY c.cust_id, c.cust_name
+HAVING COUNT(o.order_id) > 2
+ORDER BY c.cust_id;

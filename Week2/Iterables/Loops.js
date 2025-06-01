@@ -280,87 +280,139 @@ console.log(indoorss);
 
 //.flatMap() :----> used for arrays inside an array and want to extract items
 
-const library = {
-  name: "Central Library",
-  location: {
-    city: "Metropolis",
-    address: "123 Library St."
-  },
-  sections: [
-    {
-      name: "Fiction",
-      books: [
-        { 
-          title: "The Great Gatsby", 
-          author: { firstName: "F. Scott", lastName: "Fitzgerald" }, 
-          year: 1925, 
-          genres: ["Novel", "Historical"],
-          copies: [
-            { id: 1, status: "available" },
-            { id: 2, status: "borrowed" }
-          ]
-        },
-        { 
-          title: "1984", 
-          author: { firstName: "George", lastName: "Orwell" }, 
-          year: 1949, 
-          genres: ["Dystopian", "Science Fiction"],
-          copies: [
-            { id: 3, status: "available" },
-            { id: 4, status: "available" }
-          ]
-        }
-      ]
-    },
-    {
-      name: "Non-Fiction",
-      books: [
-        { 
-          title: "Sapiens", 
-          author: { firstName: "Yuval Noah", lastName: "Harari" }, 
-          year: 2011, 
-          genres: ["History", "Anthropology"],
-          copies: [
-            { id: 5, status: "borrowed" }
-          ]
-        }
-      ]
-    }
-  ]
-};
+// const library = {
+//   name: "Central Library",
+//   location: {
+//     city: "Metropolis",
+//     address: "123 Library St."
+//   },
+//   sections: [
+//     {
+//       name: "Fiction",
+//       books: [
+//         { 
+//           title: "The Great Gatsby", 
+//           author: { firstName: "F. Scott", lastName: "Fitzgerald" }, 
+//           year: 1925, 
+//           genres: ["Novel", "Historical"],
+//           copies: [
+//             { id: 1, status: "available" },
+//             { id: 2, status: "borrowed" }
+//           ]
+//         },
+//         { 
+//           title: "1984", 
+//           author: { firstName: "George", lastName: "Orwell" }, 
+//           year: 1949, 
+//           genres: ["Dystopian", "Science Fiction"],
+//           copies: [
+//             { id: 3, status: "available" },
+//             { id: 4, status: "available" }
+//           ]
+//         }
+//       ]
+//     },
+//     {
+//       name: "Non-Fiction",
+//       books: [
+//         { 
+//           title: "Sapiens", 
+//           author: { firstName: "Yuval Noah", lastName: "Harari" }, 
+//           year: 2011, 
+//           genres: ["History", "Anthropology"],
+//           copies: [
+//             { id: 5, status: "borrowed" }
+//           ]
+//         }
+//       ]
+//     }
+//   ]
+// };
 
 
-//get all book titles
-console.log('\n');
-console.log('\n');
-console.log("ALL BOOKS TITLE");
-const allBookTitles= library.sections.flatMap((sec)=>{
-    return sec.books
-}).map((books)=>{
-    return books.title
+// //get all book titles
+// console.log('\n');
+// console.log('\n');
+// console.log("ALL BOOKS TITLE");
+// const allBookTitles= library.sections.flatMap((sec)=>{
+//     return sec.books
+// }).map((books)=>{
+//     return books.title
+// })
+// console.log(allBookTitles);
+
+// //books published before 1950
+// console.log('\n');
+// console.log('\n');
+// console.log("books before 1950");
+
+// const booksBefore1950=library.sections.flatMap((sec)=>{
+//     return sec.books
+// }).filter((book)=>{
+//    return  book.year<1950
+// })
+// console.log(booksBefore1950);
+
+// //list author names of all books in fiction section
+// console.log('\n');
+// console.log('\n');
+// console.log("Author with fiction section");
+// let ficAuht=library.sections.find((sec)=>{
+//     return(sec.name==="Fiction")
+// })
+// .books.map((book)=>{
+//     console.log(`${book.author.firstName} : ${book.title}`);
+// }) 
+
+// const arr=[5,1,3,2,6]
+
+// //user to transform an array
+// const output=arr.map((e)=>{
+//   return e*2;
+// })
+
+// //run this function and will create a new array
+// console.log(output);
+
+// for binary .toString(2)
+
+// .filter()-------> Used to filter my array according to some condition
+
+const arr1=[5,1,3,2,6];
+
+//filter
+const outputtt=arr1.filter((num)=>{
+  return num>2;
 })
-console.log(allBookTitles);
 
-//books published before 1950
-console.log('\n');
-console.log('\n');
-console.log("books before 1950");
+console.log(outputtt);
 
-const booksBefore1950=library.sections.flatMap((sec)=>{
-    return sec.books
-}).filter((book)=>{
-   return  book.year<1950
-})
-console.log(booksBefore1950);
+// REDUCE : it is used when we need to take all the elements of an array and reduce it into a single value
 
-//list author names of all books in fiction section
-console.log('\n');
-console.log('\n');
-console.log("Author with fiction section");
-let ficAuht=library.sections.find((sec)=>{
-    return(sec.name==="Fiction")
-})
-.books.map((book)=>{
-    console.log(`${book.author.firstName} : ${book.title}`);
-}) 
+//sum or max
 
+//refuce has 2 parameters 1) a function and 2) A default value
+
+// curr represents the current value
+// acc keeps on accumulating the value
+
+// const myoutput=arr1.reduce(function(acc,curr){
+//   acc=acc+curr
+// },0);
+
+
+const users=[
+  {firstName:"Hridyesh",lastName:"sHARMA",age:21},
+  {firstName:"Hri",lastName:"s",age:22},
+  {firstName:"Hridy",lastName:"ARMA",age:23},
+  {firstName:"Aash",lastName:"RMA",age:27},
+]
+//chaining ho rahi hai
+const output= users.filter((x)=>x.age>21).map((x)=>{console.log(x.firstName);})
+console.log(output);
+
+let arr=[1,2,[3,4,[5,10],6,7,]]
+
+console.log(arr.flat(2).map((el)=>{
+  return el*2;
+}));

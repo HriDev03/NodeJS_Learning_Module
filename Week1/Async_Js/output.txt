@@ -30,7 +30,7 @@ let importantAction4=(userName,cb)=>{
 const message=importantAction("Hri",(message)=>{
     console.log(message); // callbacks make it sync
 
-    // run it once import action has done execution
+    // run it once important action has done execution
     importantAction2("hri2",(message)=>{
 
         console.log(message);
