@@ -1,10 +1,12 @@
 import pkg from 'pg';
 import dotenv from 'dotenv';
 
+
 dotenv.config();  // ensure env vars are loaded here or only in main file and import after
 
 const { Pool } = pkg;
 
+//creating a pool of connection that will be used everytime we try to connect to db
 const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
@@ -13,7 +15,7 @@ const pool = new Pool({
   port: Number(process.env.DB_PORT),
 });
 
-pool.on('connect', () => {
+pool.on("connect", () => {
   console.log('Connection pool established with DB');
 });
 

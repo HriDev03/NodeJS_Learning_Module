@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import pool from './config/db.js';
 import errorHandler from './middlewares/errorHandler.js';
 
-//import userRoutes from "./routes/userRoutes.js"
+import userRoutes from "./routes/userRoutes.js"
 
 dotenv.config();
 
@@ -12,18 +12,20 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5001;
 
-app.use(cors());
+//NORMAL MIDDLEWARES
 app.use(express.json());
+app.use(cors());
 
-//routes and versioning
-// app.use("api",userRoutes,"/v1");
+//ROUTES
+app.use("/api",userRoutes)
 
-//middlewares
+// ERROR HANDLER MIDDLERWARES
 app.use(errorHandler)
 
-//postres
+// POSTGRES CONNECTION TEST KRR RAHE HAI
 app.get('/', async (req, res) => {
   try {
+    //GIVE ME THE NAME OF THE DB JAHA SE CONNECT KIYE HO
     const result = await pool.query('SELECT current_database()');
     res.send(`The database name is: ${result.rows[0].current_database}`);
     res.status(200)
