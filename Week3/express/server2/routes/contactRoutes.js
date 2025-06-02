@@ -6,6 +6,11 @@ const {getContacts , createContact, getContact, updateContact, deleteContact} = 
 //express router object
 const router=express.Router();
 
+const validateToken=require("../middlewares/validateTokenHandler");
+
+// validate token will be used for all the routes
+router.use(validateToken)
+
 //default route will get all contacts
 router.get("/",getContacts);
 
