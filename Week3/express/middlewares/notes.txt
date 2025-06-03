@@ -1,0 +1,23 @@
+IT IS A FUNCTION THAT WE USE JAB 
+REQ --- Middleware -----------> RES 
+request receive hone ke just baad processing start hone se just pehle middleware use hota hai
+1) LOG , 2) VERIFY , 3) VALIDATION
+
+//REQUEST RESPONSE KE CYCLE KE BEECH MIDDLEWARE AATA HAI
+1)  VALIDATE 
+2)  LOG
+3)  ERROR HANDLING
+4)  AuthN and AuthZ
+5)  EXECUTE
+6)  Parsing
+
+eg : ROLE BASED ACCESS CONTROL
+PATA KAISE LAGG RAHA HAI KI ADMIN WAALA DATA SHOW KARNA HAI YAA NAHI l MIDDLEWARE
+REQ,RES KA ACCESS PURA HAI
+1) execute our code
+2) change in req and RESPONSE
+3) end of request response CYCLE
+4) Next middleware ko call krr sakta hai
+
+
+//ROUTER LEVEL MIDDLEWARES ARE SAME AS APP LEVEL MIDDLEWARES BUT THEY ARE BOUND TO THE INSTANCE OF ROUTES
