@@ -111,18 +111,17 @@ const loginUser=asyncHandler(async(req,res)=>{
             process.env.ACCESS_TOKEN_SECRET,
             //expiration time: after token is expired user should not be able to access the token in order to call the api
             {expiresIn:"15m"}
+        );
 
-        );  
         // if theris a valid user and password matches give it a access token
         res.status(200).json({accessToken});
-    }
-    else{
+    }else{
         // email or password is not valid
         res.status(401)
         throw new Error("Email or Password is not valid")
     }
-
 })
+
 /*
     get Current User Info
     route get/api/users/current
@@ -130,11 +129,9 @@ const loginUser=asyncHandler(async(req,res)=>{
 
     to access this the client need to pass the access token so that only the authentic client can access it
 
-
 */
 const currentUser=asyncHandler(async(req,res)=>{
     res.json(req.user)
 })
 
 module.exports={registerUser,loginUser,currentUser}
-

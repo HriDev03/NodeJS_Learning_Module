@@ -9,23 +9,22 @@ const router=express.Router();
 const validateToken=require("../middlewares/validateTokenHandler");
 
 // validate token will be used for all the routes
-router.use(validateToken)
+//since validate token hrr jaha use hoga soo we can simple use it as a midleware
 
 //default route will get all contacts
-router.get("/",getContacts);
+router.get("/",validateToken,getContacts);
 
 //creating a contact
-router.post("/",createContact);
+router.post("/",validateToken,createContact);
 
 //getting a contact
-router.get("/:id",getContact);
-
+router.get("/:id",validateToken,getContact);
 
 
 //updating a contact
-router.put("/:id",updateContact);
+router.put("/:id",validateToken,updateContact);
 
 //deleting a contact
-router.delete("/:id",deleteContact)
+router.delete("/:id",validateToken,deleteContact)
 
 module.exports=router

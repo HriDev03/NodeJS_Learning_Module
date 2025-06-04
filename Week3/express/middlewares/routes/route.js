@@ -61,13 +61,5 @@ router.get("/admin" , auth , isAdmin,(req,res)=>{
 })
 
 
-const getUsers=(req,res)=>{
-    res.json({message:"Get all users"});
-}
-const createUser=(req,res)=>{
-    res.json({message:"Get new user"});
-}
-
-router.route("/").get(getUsers).post(createUser)
 
 module.exports=router

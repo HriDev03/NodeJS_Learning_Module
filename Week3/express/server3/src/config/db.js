@@ -1,10 +1,20 @@
+//DB CONNECTION KI FILE HAI 
+
 import pkg from 'pg';
 import dotenv from 'dotenv';
 
 
-dotenv.config();  // ensure env vars are loaded here or only in main file and import after
+//.env waali saari values ko ek process object mai laa aata hai
+dotenv.config(); 
 
 const { Pool } = pkg;
+
+// check karo ki saare variable aa gye ki nahii
+console.log('DB_USER:', process.env.DB_USER);
+console.log('DB_HOST:', process.env.DB_HOST);
+console.log('DB_NAME:', process.env.DB_NAME);
+console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
+console.log('DB_PORT:', process.env.DB_PORT);
 
 //creating a pool of connection that will be used everytime we try to connect to db
 const pool = new Pool({

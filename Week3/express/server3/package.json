@@ -1,5 +1,5 @@
 {
-  "name": "express",
+  "name": "server3",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -16,10 +16,7 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "joi": "^17.13.3",
-    "pg": "^8.16.0",
-    "nodemon": "^3.1.10"
-  },
-  "devDependencies": {
-    
+    "nodemon": "^3.1.10",
+    "pg": "^8.16.0"
   }
 }
