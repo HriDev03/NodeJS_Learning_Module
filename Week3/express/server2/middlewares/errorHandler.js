@@ -5,7 +5,8 @@ const errorHandler=(err,req,res,next)=>{
         case 400:
             res.json({
                 title:"Validation Failed",
-                message:err.message
+                message:err.message,
+                statuscode:err.statusCode
             });
         break;
 

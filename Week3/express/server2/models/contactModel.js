@@ -24,6 +24,10 @@ const contactSchema=mongoose.Schema(
             type:String,
             required:[true,"Please add the contact phone number"],
         },
+        isDeleted:{
+            type: Boolean,
+            default: false,
+        },
     },
     {
         timestamp:true,

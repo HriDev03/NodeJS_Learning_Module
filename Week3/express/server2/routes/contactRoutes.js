@@ -1,7 +1,7 @@
 const express=require("express");
 
 //fetching all the controllers
-const {getContacts , createContact, getContact, updateContact, deleteContact} = require("../controllers/contactControllers");
+const {getContacts,restoreContact,createContact,getContact,updateContact,deleteContact}=require("../controllers/contactControllers");
 
 //express router object
 const router=express.Router();
@@ -26,5 +26,11 @@ router.put("/:id",validateToken,updateContact);
 
 //deleting a contact
 router.delete("/:id",validateToken,deleteContact)
+
+// Soft deleting a contact
+router.delete("/:id",validateToken, deleteContact);
+
+// Restoring a soft delete contact
+router.patch("/:id/restore",validateToken,restoreContact);
 
 module.exports=router

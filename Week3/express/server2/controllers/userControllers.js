@@ -134,4 +134,46 @@ const currentUser=asyncHandler(async(req,res)=>{
     res.json(req.user)
 })
 
-module.exports={registerUser,loginUser,currentUser}
+// Delete a User
+// route DELETE /api/users/:id
+// access private (should be protected in routes)
+const deleteUser=asyncHandler(async (req,res)=>{
+    const user=await User.findById(req.params.id);
+    if(!user){
+        res.status(404);
+        throw new Error("User not found");
+    }
+    //agar user already delete ho gyaa hai toh error
+    //true: if will run 
+    if(user.isDeleted){
+        res.status(400);
+        throw new Error("User already deleted");
+    }
+    //user ko delete mark krr do
+    user.isDeleted = true;
+    await user.save();
+    res.status(200).json({ message: "User soft deleted successfully" });
+});
+
+
+// Restore a User
+// route PATCH /api/users/:id/restore
+// access private (should be protected in routes)
+const restoreUser = asyncHandler(async (req, res) => {
+    const user=await User.findById(req.params.id);
+    if (!user){
+        res.status(404);
+        throw new Error("User not found");
+    }
+    if (!user.isDeleted){// false : true
+        res.status(400);
+        throw new Error("User is not deleted");
+    }
+    //user isDelete jo false mark karoo
+    user.isDeleted = false;
+    //save in database
+    await user.save();
+    res.status(200).json({ message: "User restored successfully" });
+});
+
+module.exports={registerUser,loginUser,currentUser,deleteUser,restoreUser}
