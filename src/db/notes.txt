@@ -1,0 +1,2 @@
+second approach ek file le waha ek function banaye waha usko export kare 
+aur index file mai use karo
