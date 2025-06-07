@@ -176,4 +176,27 @@ const restoreUser = asyncHandler(async (req, res) => {
     res.status(200).json({ message: "User restored successfully" });
 });
 
-module.exports={registerUser,loginUser,currentUser,deleteUser,restoreUser}
+// route: GET /api/users?page=1&limit=10
+const getUsers = asyncHandler(async (req, res) => {
+    // default page = 1 records first page se show karege
+    const page = parseInt(req.query.page) || 1; 
+    // default limit = 10 records hrr document mai
+    const limit = parseInt(req.query.limit) || 10; 
+    // kon se records ko skip karna padega before showing the docs we wanted
+    const skip = (page - 1) * limit;        
+    const users = await User.find({ isDeleted: false }) .skip(skip).limit(limit)
+    //avoid sending password
+    .select('-password'); 
+
+    //total number of users excluding soft deletied ones
+    const totalUsers = await User.countDocuments({ isDeleted: false });
+
+    res.json({
+        total: totalUsers,
+        page,
+        totalPages: Math.ceil(totalUsers / limit),
+        users,
+    });
+});
+
+module.exports={registerUser,loginUser,getUsers,currentUser,deleteUser,restoreUser}

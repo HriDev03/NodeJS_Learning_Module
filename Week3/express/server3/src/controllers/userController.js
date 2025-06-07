@@ -42,16 +42,15 @@ export const getAllUsers = async(req,res,next)=>{
 
 
 // --------------------------------------------------------------------------------------------------
-
 // Getting  user By ID
 export const getUserById = async (req, res, next) => {
-    try {
+    try{
         const user = await getUserByIdService(req.params.id); // Use the service
         if (!user) {
             return handleResponse(res, 404, "User Not Found, Bad Request");
         }
         handleResponse(res, 200, "Got User by ID", user);
-    } catch (err) {
+    } atch (err) {
         next(err);
     }
 };
@@ -69,7 +68,6 @@ export const updateUser = async(req,res,next)=>{
     }catch(err){
         next(err);
     }
-    
 }  
   
 // --------------------------------------------------------------------------------------------------

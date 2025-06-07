@@ -1,4 +1,8 @@
 import mongoose from "mongoose"
+import jwt from "jsonwebtoken";
+import bcrypt from  "bcrypt"
+
+
 
 const userSchema= new mongoose.Schema({
     username:{
@@ -16,15 +20,14 @@ const userSchema= new mongoose.Schema({
     password:{
         type:String,
         required:true
-    }
-},{
-    // secondary object
-    timestamps:true
-    // created at , updated at
-
+    },
+    // added to impliment soft delete here
+    isDeleted: {
+        type: Boolean,
+        default: false,
+    },
 })
 
 
 export const User=mongoose.model("User",userSchema)
 
-//jab model store hoga it will be stored as users

@@ -1,0 +1,63 @@
+// ORM : orject relational mapping , write in object like structure and it will be converted to querries
+// node+ Kenx lib(used to write queries and give our data)
+
+//KNEX IS A QUERRY BUILDER THAT HELPS US TO WRITE SQL QUERIES
+
+1)installation steps
+npm i --save knex
+npm i -g knex : populationg it , installing it in global
+knex init : it will create a knex file for us : A CONFIG FILE FOR KNEX JS
+// which containes the env config for knex
+
+
+
+What are Migrations?
+Migrations are like version control for your database schema.
+They are JavaScript files that define changes to your database structure (e.g., creating tables, adding columns, modifying indexes).
+Each migration file usually describes a small change, like “create users table” or “add email column to users”.
+
+Migrations help you:
+Track changes to your database schema over time.
+Share schema changes easily with your team.
+Apply or rollback schema changes consistently across different environments (dev, staging, prod).
+The directory: __dirname + '/knex/migrations' setting tells Knex:
+“Look for migration files in this folder inside my project.”
+
+
+
+
+
+What are Seeds?
+Seeds are scripts that populate your database with initial or sample data.
+They’re useful to add default users, configuration, or test data into tables after they are created.
+
+Seeds help you:
+Set up your database with basic data for development or testing.
+Ensure consistent starting data across different environments.
+Quickly reset and repopulate your database during development.
+The directory: __dirname + '/knex/seeds' setting tells Knex:
+“Look for seed files in this folder inside my project.”
+
+
+
+
+2) about scripts 
+"migrate":"knex migrate:latest",
+
+It runs all pending migrations that have not been run yet.
+
+It updates your database schema to the latest version based on your migration files.
+
+This means if you added new migration files since the last time you ran it, those changes will be applied to your database.
+
+
+// PG : POSTRES CLIENT
+
+// some commands
+
+    "migrate":"knex migrate:latest", : Runs all pending migration files to update your database schema to the latest version.
+
+    "make":"knex migrate:make", : Creates a new migration file inside your migrations folder (like knex/migrations/) with the name you provide.
+
+
+//knex insert : Jab aap insert() karte ho Knex se, to woh return karta hai ek array jisme wo saare inserted rows ke IDs hote hain.

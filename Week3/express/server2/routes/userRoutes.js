@@ -20,4 +20,6 @@ router.delete("/:id",validateToken,deleteUser);
 // put tabh use hota jaha pura naya , aur saare fields update hote
 router.patch("/:id/restore",validateToken,restoreUser);
 
+router.get("/", getUsers); // GET /api/users?page=1&limit=10
+
 module.exports=router;

@@ -1,0 +1,22 @@
+const express=require("express");
+const dotenv=require("dotenv");
+const dbConnect = require("./src/db/db.js");
+
+
+dotenv.config();
+
+const app=express();
+
+app.use(express.json());
+
+// app.use("/api/auth",authRoutes)
+
+// app.use("/api/user",userRoutes)
+
+const port = process.env.PORT || 7002;
+
+dbConnect();
+
+app.listen(port,()=>{
+    console.log(`Server is running on PORT ${port}`);
+})

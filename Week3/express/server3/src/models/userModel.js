@@ -15,7 +15,6 @@ export const getAllUsersService=async()=>{
 //getting user by id
 export const getUserByIdService=async(id)=>{
     // dont put value directly here as it could lead to sql injection
-
     // we will place $1 as a placeholder jaha prr we can place id
     const result=await pool.query(
         "SELECT * FROM users WHERE id=$1",
