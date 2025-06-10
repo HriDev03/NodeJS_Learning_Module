@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+//yaha model bann sakte hai 
+
+//one to many : a user can make many posts here
+model User{
+  
+  // Jab main id bolun, tu MongoDB ke _id ko samajhna
+  // in the mongo db every this has a _id , map it to id in prisma
+
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String?
+  email     String    @unique
+  password  String 
+
+  //user can have as many stings as it likes
+  post Post[]
+
+}
+
+model Post{
+  
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  
+  //unique url for each post , make our routes more readable
+  slug      String
+  title     String
+  body      String
+
+  // relation set krr diyaa
+  author    User @relation(fields: [authorId], references: [id])
+  authorId  String @db.ObjectId
+}
+
+
+

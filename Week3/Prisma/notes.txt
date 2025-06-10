@@ -1,0 +1,51 @@
+
+node js env ke liye orm hai 
+
+OBJECT RELATION MAPPER :  
+
+db ke liye language hai 
+agar relation db se communicate karna hai toh uski language sequel hai, aur js oops mai baat karta hai
+toh dono ko map karr deta hai 
+
+java scipt code aur relation db ke beech ka medium
+prisma is beginner friendly
+can support both sequel and non sequel db
+// to manage complex queries on the prod env
+
+// obj ko aur jo db hai usse mapp krr deta hai saath mai
+
+//why prisma ? 
+beginner friendly, doc is readable, can spport both relational and non relational,
+migrations can be managed with the single schema file , 
+prisma client is great
+easy to use
+typesafe querry builder
+
+// jo object hai aur jo relation hai dono ko map krr deta hai
+ 
+// js ki jo prisma client ki library hai voh type mai kaam karta hai
+
+// PRISMA CLIENT : auto generate querry builder and type safe
+// PRISMA MIGRATE : declarative data modelling and customizable migrations , DB SCHEMA MIGRATIONS
+//PRISMA STUDIO : 
+
+npm i prisma 
+npx prisma 
+npx prisma init
+
+npm i @prisma/client
+
+
+how will this model change to a table : npx prisma migrate dev --name create_user_schema
+
+Full-text Search
+
+//find first, findfirstorthrow , findunique
+
+//update upset update many 
+
+UPDATE "public"."User" SET "name" = $1, "email" = $2, "password" = $3 WHERE 
+("public"."User"."id" = $4 AND 1=1) RETURNING "public"."User"."id", "public"."User"."name", "public"."User"."email", "public"."User"."password", "public"."User"."created_at"
+
+// koi bohot bada aragraph ho jaha 1000's  words hai waha e can apply full text search
+it is the best way to do that

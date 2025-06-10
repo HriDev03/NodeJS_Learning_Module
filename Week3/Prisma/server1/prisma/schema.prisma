@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearchPostgres"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+// sabse pehle model banao jiske upar crud hoga
+model User{
+  //id integer defaultvalue : autoinvcement @id:primary key
+  id          Int       @id @default(autoincrement()) 
+  //to make it optional
+  name        String?   
+  email       String    @unique
+  // made optional for OAuth no password neede there 
+  password    String?   
+  // one user can create many posts thats why array of posts we made
+  // one to many user->Posts
+  post Post[]
+
+  comment Comment[]
+
+  created_at  DateTime  @default(now())// jo uss time pe time hoga usse store krr lo
+}
+
+// RELATIONS IN PRISMA
+//post
+model Post{
+  // id of post
+  id        Int           @id         @default(autoincrement())
+
+  //related to user : koi relation ek user hii banaye ga iss liye userId chahiye
+  // jo iss current table ka field hai aap kiss se relation laga sakte ho iss user ke liye 
+  //humne post pe toh relation laga diya abb user ki relation bhi lagao
+  
+  // agar mai koi user delete karu toh uski posts aur uske comments bhi delete hone chahiye
+  user      User          @relation( fields: [user_id],references: [id], onDelete: Cascade)
+  // user-> field name, User->model name
+  
+  //ek post pe multiple comments
+  comment   Comment[]
+
+  user_id         Int//foreign key hai yeh 
+  
+  @@index([user_id]) //indexing bhi krr di
+
+  title           String
+  
+  description     String
+  
+
+  comment_count   Int           @default(0)
+
+  
+  created_at      DateTime      @default(now())
+
+}
+
+
+model Comment{
+  id          String      @id     @default(uuid())
+  //post pe comment hua hoga kisi user nai kiya hoga
+  // abb comments toh ek post pe hii hogi toh set relations
+  post Post @relation(fields: [post_id],references: [id] , onDelete: Cascade)
+  post_id     Int
+  //abb comment bhi toh ek user karega soo set its relation
+  user User @relation(fields: [user_id],references: [id] , onDelete: Cascade)
+  user_id     Int
+  comment     String
+  created_at  DateTime    @default(now())
+}
+
+
+/*
+  difference between uuid and autoincrement id : 
+  if we are performance oriented : use normal autoincrement it will be sorted fast
+
+  if we want to be secure : we can use uuid , if we want uique id however big the database is we will use uuid
+
+  inn sab schema ko relation ship pe reflect karne ke liye we need to run the migrate command
+  : npx prisma migrate --dev  --name=added_post_and_comment_schema
+
+
+*/
