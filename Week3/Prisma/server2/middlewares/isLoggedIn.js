@@ -6,7 +6,7 @@ const jwt=require('jsonwebtoken')
 const isLoggedIn= async(req,res,next)=>{
     try{
         //fetching token
-        const token=req.cookie.token
+        const token=req.cookies.token
         if(!token){
            throw new Error("Please LogIn")
            //ideal case : send a response and close next
@@ -21,6 +21,7 @@ const isLoggedIn= async(req,res,next)=>{
             }
         })
         //aur checks bhi krr sakte hai
+        //when done with everything  , shift the control to othermiddlewares, or callbacks
         next()
 
     }catch(error){
@@ -28,3 +29,4 @@ const isLoggedIn= async(req,res,next)=>{
     }
 }
 
+module.exports=isLoggedIn
