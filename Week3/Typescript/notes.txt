@@ -1,0 +1,70 @@
+WHY TYPESCRIPT : angular,vue,next.js,nest,next and typescript are great
+ALL LATEST JAVASCIPT FRAMEWORKS ARE BASEDON TYPESCRIPT
+
+What is TS : TS is superset of js that adds static typing and other features
+JS+ Extra features = TypeScript : Easier to read,
+Easier to write, Easier to maintain
+
+ANY VALID JS CODE IS ALSO A VALID TS CODE
+
+
+TS ADVANTAGES : 
+
+JS  : PRETTY BAD APPROACH               |   TS : Type safe    
+                                        |              |--->Static Typing                                                        
+let fName="Hri",                        |   let fName:string="Hri"
+                                        |   [THIS WILL BE ERROR]: AGAR EK BAAR STRING BOOL DIYA TOH STRING HII RAHEGA
+                                        |   ONLY STRING VALUE CAN BE SAVED IN THIS VARIABLE
+fname=105,                              |   fName=105
+fname=true,                             |   fName=true
+                                        |
+console.log(fName)--->true              |
+
+
+EASIER TO WRITE,  IT KNOWS TO UNDERSTAND THE DATA TYPE ; ITS INTELLIGENT
+COMPLIE TIME PAI HII ERROR BATA DEGA ,Auto completion , complie time error handling
+
+Easier to maintain
+
+
+EXTRA FEATURES : Interfaces, Tuples, Enums,Classes, Generic, Abstract Classes etc...
+// NEED TO PREDEFINED EVERYTHING IN ADVANCE
+
+IT TELLS THE ERRORS IN COMPLIE TIME INSTEAD OF RUNTIME, which makes debugging easier and reduces the likelihood of bugs in prod.
+
+
+browser TS KO support nahi karta in the end it is complied to JS
+
+TS  ------>   TS COMPLIER    -------->   JS
+
+// prerequisits : JS BASICS
+
+HOW TO RUN A TS FILE : 
+
+1) tsc : firr saari files compile hoke chalegi 
+2) tsc fileName : Only the file we want to run will run
+
+
+TypeScript programming amd Config file
+tsc --init
+
+Will initialise the TypeScript here and will get the rsconfig file
+
+ts config file
+// the problem : mere ts code mai error hai firr bhi complier ts ko complie karke its giving us js file
+which is wrong
+
+through the ts config file : WE WILL TELL TS ki jab error hai toh tu index.js kyuu de raha hai seedha error throw krr compilation mai 
+ki jab takk error thik nahi karte i dont need index.js file
+
+/* Disable emitting files if any type checking errors are reported. */
+//jab tak galti hai index.js ko emiit nahi karo
+"noEmitOnError": true
+tsc --noEmitOnError index.ts
+or just run tsc
+
+
+// TYPE ANNOTATIONS ------>into to types in ts
+way to specify the type of variables , function parameter or function return value
+
+
