@@ -49,3 +49,59 @@ UPDATE "public"."User" SET "name" = $1, "email" = $2, "password" = $3 WHERE
 
 // koi bohot bada aragraph ho jaha 1000's  words hai waha e can apply full text search
 it is the best way to do that
+
+
+
+// TRANSACTIONS IN DB
+
+ACID properties : Atomicity , Consistency , Isolation , Durability
+
+1) Atomacity : Either all steos are properly done in the transaction or none
+Transaction : will either be sucessful
+or it will rollback and old state will be recovered
+
+
+2) Consistency : Money can never be created nor it can be destroyed
+total money in the system should be same before and after transaction , consistency of daya should be maintained
+
+
+3) Isolation:
+In banking system there will be many transactions , all these transactions should be Isolated and should not interfere 
+Job of the system is that they dont interfear, concurrently execute , and be sequential
+
+// old state-------->Intermediate---------->commit|
+        |_________________________________________|
+
+
+
+4) Durability : After transactions is completed , the changes it has pade to the database persist,even if te system fails....
+agar transaction sucess ho gyi tabh jo db mai jo updating ki hai voh permanent ho jaaye even if these is a system failure '
+recovery management component
+
+read A;
+A=A-50
+Write(A)
+
+read B
+B=B+50;
+Write(B)
+
+jab bhi system restart ho tabh recovery ho jaaye  
+
+States of transactions : 
+
+Active State -----------> write and read ops happen here
+    |
+Partially Comitted ----------->changes are saved in Buffer
+    |
+Comitted State ------------------> if the change and steps are done then it becomes Permanent state
+                                    cant rollback now uss se pehle rollback ho raha thaa
+
+Failed State ---------------------> if during transaction if there is any error thanit is impossible to continue the  execution
+    |
+rollback------------------------------> jitne bhi steps ho gye the pure before failure rollback from them
+
+Aborted Stage : all the changesmade by the buffers are reversed , and transactions rollback cmpletely and reaches the abored state
+
+Terminated State : Transaction is said to be terminated either after sucessfull transaction or when it i Aborted
+

@@ -1,0 +1,210 @@
+| Feature                 | Memoization (याद रखना)          | Redis Caching (बाहरी Cache)              |
+| ----------------------- | ------------------------------- | ---------------------------------------- |
+| Store kaha hota hai?    | App ke andar (local memory)     | Redis server (external memory)           |
+| Kab tak rehta hai?      | Jab tak app chal rahi ho        | Restart ke baad bhi reh sakta hai        |
+| Kaun use kar sakta hai? | Sirf wahi function ya user      | Sabhi systems/services                   |
+| Speed kaisi hai?        | Bahut fast (RAM use karta hai)  | Bahut fast (Redis bhi RAM use karta hai) |
+| Use kab karein?         | Chhoti calculations, single app | Large scale apps, DB/API call caching    |
+
+
+.
+
+🔁 Memoization kya hai?
+Memoization ek programming technique hai jisme function ke result ko yaad (store) rakha jaata hai, taaki agar same input dubara aaye to calculation na karke seedha result de diya jaaye.
+
+📌 Kya hota hai isme?
+Sirf function ke andar hi kaam karta hai.
+Sirf same input pe kaam karta hai.
+Sab kuch RAM (local memory) mein store hota hai.
+Jab app band hoti hai, data ud jaata hai.
+Zyada tar single-user ya single-process ke liye hota hai.
+
+
+🗃️ Caching (Redis jaise) kya hai?
+Caching ka matlab hai frequently used data ko external memory (jaise Redis) mein store karna taaki baar-baar database ya slow operation na karna pade.
+
+📌 Kya hota hai isme?
+Ye external system (Redis) mein hota hai, sirf local nahi.
+Multiple users/systems ke beech share ho sakta hai
+Data ko kayi ghanto, dinon ya hafton tak store kiya ja sakta hai.
+Redis bahut tez (fast) hota hai, database se bhi fast.
+Jab app band ho jaye, Redis phir bhi chal sakta hai.
+
+Yahan agar user ka data Redis mein hai to wahi de diya jaayega. 
+Nahi to database se fetch hoga aur Redis mein store bhi kar diya jaayega
+
+
+// MONGO DB IS CHEAP COMPAIRED TO REDIS : permanent storage of data  in database (memory):MongoDB its is slow and data stored in harddisk
+
+// Redis is an In memory data storage solution, that stores data in RAM that enables fast retreval but is expensive so thats why not used as our main DB
+Ek baar restart hua toh data wipe out ho jaaye ga
+
+// strings and numbers are stores as strings in redis
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//BASIC COMMANDS FOR STRINGS
+
+SET key value
+GET key
+DEL key
+
+//SET GET TOGETHER
+set name mango
+set name apple get ------->mango
+get name ---->apple
+// setting multiple key value pairs
+MSET ke1 value1 key2 value2 key3 value3
+MSET name2 Hri name3 Happy color Green rating 10
+
+//setting multiple values here
+MGET key names
+MGET name name2 color rating
+
+// To see VALUES IN A RANGE
+
+GETRANGE 0 to end[included]
+GETRANGE name -3 -1(last 3 characters)
+
+//TO REWRITE NAME
+SETRANGE name 3 abc
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+commands to increase and decrease NUMBERS
+
+// with numbers
+INCR rating
+DECR rating
+
+//increase/decrease by 5
+INCRBY rating 5
+DECRBY rating 5
+
+--------------------------------------------------------------------------------------------------------------------------
+
+TIME BOUNDED AND USED TO MAKE A KEY IF OR IF NOT EXISTS
+
+EX : set with specific expiry time in seconds
+PX : set with specific expiry time in milliseconds
+
+XX : only set the key if it already exists
+NX : only set the key only when it does not already exist
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+SETS IN REDIS  : 
+Sets in redis are unordered collection of string which all are unique
+    
+USE CASES
+    tracking unique ip addresses 
+    values in sets are called as members
+
+HOW TO MAKE A SET : we can enter values in the set and if it dosent exist redis will create our set its unsorted
+
+1)  SADD : used to add members to the set
+    
+    SADD name abc raj neet
+
+2)  SREM :used to  remove members form the set 
+    
+    SREM names Raj neet Hridyesh Kaushik Ansh abc
+
+3)  SUNION : Is used to make union of two or more sets
+    
+    SUNION name morenames ....
+
+4)  SISMEMBER : is used to check if a member is present in a set
+    
+    SISMEMBER  names raj  will give result in either 0 or 1
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+//LIST IN REDIS (dequeue hai yeh)
+
+Unordered collection of string values that do not need to be unique,
+lists have order based on how we enter them
+
+its like a queue : 
+
+pushing values like in the start of the queue 
+and popping values from the end of the queue
+
+its like a linked lists , do not need to store in the same location 
+eachvalue has the pointer to the next value
+
+// it is slow for the middle but when we are trying to access the head or the tail its fast
+
+USECASES : 
+when data progresses over time , 
+    queue of orders
+    status updates
+
+
+HOW TO MAKE A LIST : we can make a list by pushing items in it and if it dosent exits redis will make on for us
+
+
+COMMANDS TO ADD STUFF ON THE LIST
+
+    LPUSH : entering data in the starting of the  list , left push
+    RPUSH : entering data from the right, to the end of the List, Right push
+
+
+COMMAND TO REMOVE STUFF FROM Right
+    LPOP : LPOP orders 1 : will remove the value and return it from the left
+    RPOP : RPOP orders 2 : Will remove the values from the right and return it
+
+
+LLEN : to get the length of the list
+    LLEN orders
+
+
+LRANGE : to get the Range of members of the list
+    LRANGE orders 0 1
+
+
+LINDEX : To get the index of a value 
+    LINDEX orders 1
+
+LPOS orders raj
+
+------------------------------------------------------------------------------------------------------------------------
+
+Hashes : 
+Hash is like an object with collection of key value pairs
+where each key can be named what ever we want buteach value should be string , including numbers 
+
+
+a way to add json properties in redis
+
+{
+    tite:'Harry Potter',
+    rating:'9',
+    author :'JK Rowling'
+} 
+
+HSET : to set value in the hashSet
+HSET tite :"LIFE OF PI" auhtor:"Unknown" rating 10
+
+
+HGET: to get a value from the 
+
+// to get a particular values
+HGET books:1
+
+to get all the keys and values
+HGETALL books:2
+
+to check if it exists
+HEXISTS books:1 title -> 0/1
+
+To deelte a particular field
+HDEL books1: title
+
+To delete the HashSet
+DEL books:1
+
+to check the values of the HashSet
+HVALS books:2
+
+
+
+// WHAT IS RATE LIMITING AND PUB/SUB
